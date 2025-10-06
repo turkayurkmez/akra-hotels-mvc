@@ -1,0 +1,16 @@
+﻿@model Contact;
+
+
+
+<form asp-action="CreateContact">
+    <p>
+        <input asp-for="Name" value="" />
+        <span asp-validation-for="Name"></span>
+    </p>
+    <p>
+        <input asp-for="Email" value="" />
+        <span asp-validation-for="Email"></span>
+    </p>
+    <button type="submit">Gönder</button>
+</form>
+

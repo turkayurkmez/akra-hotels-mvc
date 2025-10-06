@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Product>
+
+
+
+<p>Burası Home/Index View'i </p>
+<p>Merhaba @ViewBag.Isim</p>
+@if (ViewBag.Saat < 12)
+{
+    <p>Günaydın</p>
+}
+else if (ViewBag.Saat <= 17)
+{
+    <p>İyi günler</p>
+}
+else
+{
+    <p>İyi geceler</p>
+}
+
+<ul>
+    @foreach (var product in Model)
+    {
+        <li>@product.Name</li>
+    }
+</ul>
+<a asp-action="CreateContact" asp-controller="Home">Kayıt oluştur</a>
+<p>&copy; @ViewBag.ZiyaretTarihi</p>
