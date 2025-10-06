@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "Home Page";
+    int count = 0;
+}
+
+<div class="text-center">
+    <h1 class="display-4">Hoşgeldiniz... Gelen id: @ViewBag.Id </h1>
+
+</div>
+<div class="row p-2">
+    @foreach (var product in Model)
+    {
+        @if (count != 0  && count % 4 == 0)
+        {
+            @:</div>
+            @:<div class="row">
+        }
+
+        <div class="col-3 p-2">
+          <partial name="_ProductCard" model="product"/>
+        </div>
+
+
+        count++;
+
+    }
+</div>
+
+
+
