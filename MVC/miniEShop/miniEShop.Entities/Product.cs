@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace miniEShop.MVC.Models
+namespace miniEShop.Entities
 {
     public class Product
     {

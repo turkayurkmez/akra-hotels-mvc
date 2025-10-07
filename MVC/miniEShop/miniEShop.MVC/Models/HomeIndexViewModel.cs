@@ -1,4 +1,6 @@
-﻿namespace miniEShop.MVC.Models
+﻿using miniEShop.Entities;
+
+namespace miniEShop.MVC.Models
 {
     public class HomeIndexViewModel
     {

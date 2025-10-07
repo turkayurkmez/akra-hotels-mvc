@@ -1,7 +1,8 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using miniEShop.Application.Services;
 using miniEShop.MVC.Models;
-using miniEShop.MVC.Services;
+using miniEShop.Entities;
 
 namespace miniEShop.MVC.Controllers
 {

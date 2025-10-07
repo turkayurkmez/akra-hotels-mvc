@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using miniEShop.MVC.Models;
-using miniEShop.MVC.Services;
+using miniEShop.Application.Services;
+
+
 
 namespace miniEShop.MVC.ViewComponents
 {

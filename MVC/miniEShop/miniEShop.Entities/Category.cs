@@ -1,4 +1,4 @@
-﻿namespace miniEShop.MVC.Models
+﻿namespace miniEShop.Entities
 {
     public class Category
     {

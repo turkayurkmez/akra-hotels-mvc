@@ -1,6 +1,6 @@
-﻿using miniEShop.MVC.Models;
+﻿using miniEShop.Entities;
 
-namespace miniEShop.MVC.Services
+namespace miniEShop.Application.Services
 {
     public interface ICategoryService
     {
