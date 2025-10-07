@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "miniEShop.Entities", "miniE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "miniEShop.Application", "miniEShop.Application\miniEShop.Application.csproj", "{1268D5C0-3C82-41D9-AF97-C70407FFD8BC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "miniEShop.Infrastructure", "miniEShop.Infrastructure\miniEShop.Infrastructure.csproj", "{C1C49046-B525-4C93-B754-E7470504DA58}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{1268D5C0-3C82-41D9-AF97-C70407FFD8BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1268D5C0-3C82-41D9-AF97-C70407FFD8BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1268D5C0-3C82-41D9-AF97-C70407FFD8BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1C49046-B525-4C93-B754-E7470504DA58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1C49046-B525-4C93-B754-E7470504DA58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1C49046-B525-4C93-B754-E7470504DA58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1C49046-B525-4C93-B754-E7470504DA58}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

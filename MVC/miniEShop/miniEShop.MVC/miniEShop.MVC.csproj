@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\miniEShop.Application\miniEShop.Application.csproj" />
+    <ProjectReference Include="..\miniEShop.Infrastructure\miniEShop.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

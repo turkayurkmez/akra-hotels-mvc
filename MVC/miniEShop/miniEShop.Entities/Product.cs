@@ -15,5 +15,11 @@ namespace miniEShop.Entities
         public decimal Price { get; set; }
 
         public string? ImageUrl { get; set; } = "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg";
+
+        public int? CategoryId { get; set; }
+
+        //Navigation Property:
+        public Category Category { get; set; }
+
     }
 }

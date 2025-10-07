@@ -1,6 +1,7 @@
 
-
+using Microsoft.EntityFrameworkCore;
 using miniEShop.Application.Services;
+using miniEShop.Infrastructure.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+
+var connectionString = builder.Configuration.GetConnectionString("DbConnection");
+
+builder.Services.AddDbContext<MiniEShopDbContext>(option => { option.UseSqlServer(connectionString); });
 
 var app = builder.Build();
 
