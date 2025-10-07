@@ -1,7 +1,11 @@
+using miniEShop.MVC.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<IProductService, ProductService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 var app = builder.Build();
 
@@ -24,10 +28,29 @@ app.MapStaticAssets();
 //yerine bu satýr var:
 // app.UseStaticFiles();
 
+
+
+
+app.MapControllerRoute(
+    name: "paginationWithCategory",
+    pattern: "Kategori{category}/Sayfa{page}",
+    defaults: new { controller = "Home", action = "Index", page = 1 }
+    );
+
+app.MapControllerRoute(
+    name: "pagination",
+    pattern: "Sayfa{page}",
+    defaults: new { controller = "Home", action = "Index", page = 1 }
+    );
+
+
+
+//page olarak kullandýk
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{page?}")
+    pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets(); // Buradaki WithStaticAssets chaining Method da .net 9.0'a özel
+
 
 
 app.Run();

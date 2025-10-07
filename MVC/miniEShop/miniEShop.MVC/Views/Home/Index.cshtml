@@ -1,7 +1,8 @@
-﻿@model IEnumerable<Product>
+﻿@model HomeIndexViewModel
 @{
     ViewData["Title"] = "Home Page";
     int count = 0;
+    string activeClass = string.Empty;
 }
 
 <div class="text-center">
@@ -9,7 +10,7 @@
 
 </div>
 <div class="row p-2">
-    @foreach (var product in Model)
+    @foreach (var product in Model.Products)
     {
         @if (count != 0  && count % 4 == 0)
         {
@@ -26,6 +27,22 @@
 
     }
 </div>
+
+<nav aria-label="...">
+  <ul class="pagination pagination-lg">
+  @*   <li class="page-item active" >
+      <a class="page-link" aria-current="page">1</a>
+    </li> *@
+
+   @for (int pageNo = 1; pageNo <= Model.PagingInfo.TotalPages; pageNo++)
+    {
+
+      <li class="page-item @(pageNo == Model.PagingInfo.CurrentPage ? "active":string.Empty)" ><a class="page-link" asp-controller="Home" asp-action="Index" asp-route-page="@pageNo">@pageNo</a></li>
+    }
+    
+    
+  </ul>
+</nav>
 
 
 

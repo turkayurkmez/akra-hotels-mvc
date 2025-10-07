@@ -1,32 +1,47 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using miniEShop.MVC.Models;
+using miniEShop.MVC.Services;
 
 namespace miniEShop.MVC.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IProductService productService;
+        public HomeController(ILogger<HomeController> logger, IProductService productService)
         {
             _logger = logger;
+            this.productService = productService;
         }
 
-        public IActionResult Index(int page=1)
+        public IActionResult Index(int page=1, int? category=null)
         {
 
-            var products = new List<Product>()
-            {
-                new Product { Id = 1, Name = "Ürün A", Description = "Açýklama A", Price = 1 },
-                new Product { Id = 2, Name = "Ürün B", Description = "Açýklama B", Price = 1 },
-                new Product { Id = 3, Name = "Ürün C", Description = "Açýklama C", Price = 1 },
-                new Product { Id = 4, Name = "Ürün D", Description = "Açýklama D", Price = 1 },
-                new Product { Id = 5, Name = "Ürün E", Description = "Açýklama E", Price = 1 }
 
-            };
-            ViewBag.Id = page;
-            return View(products);
+
+            //toplam sayfa: ürün toplamý / bir sayfada gösterilecek ürün sayýsý..
+
+          //  var productService = new ProductService();// Yüksek baðýmlýlýk oluþur.
+            var products = productService.GetProducts();
+            var totalProducts = products.Count();
+            var pageSize = 4;
+            //var totalPage = (int)Math.Ceiling((decimal)totalProducts / pageSize);
+
+            var pagingInfo = new PagingInfo { CurrentPage=page, PageSize = pageSize, TotalProducts=totalProducts };
+
+            //ViewBag.TotalPages = totalPage;
+         
+            //ViewBag.CurrentPage = page;
+
+
+            var startIndex = (page -1 ) * pageSize;
+            var endIndex = startIndex + pageSize;
+            var paginatedProducts = products.Take(startIndex..endIndex);
+
+            var viewModel = new HomeIndexViewModel { PagingInfo = pagingInfo, Products = paginatedProducts };
+
+            return View(viewModel);
         }
 
         public IActionResult Privacy()
