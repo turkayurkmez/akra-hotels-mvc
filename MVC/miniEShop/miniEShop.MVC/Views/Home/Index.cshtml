@@ -44,5 +44,27 @@
   </ul>
 </nav>
 
-
+@section Scripts{
+    
+     <script>
+         $(document).ready(function(){
+             $('.basket').on('click',function(){
+                 console.log("tıklandı");
+                 var id = $(this).data('id');
+                 //ajax: asnyc js and xml 
+                 $.ajax({
+                     url:'/Shopping/AddToCard/' + id,
+                     type:'GET',
+                     success:function(data){
+                         console.log(data);
+                     },
+                     error:function(err){
+                         console.log(err);
+                     }
+                 });
+                 console.log(id);
+             });
+         });
+     </script>
+}
 

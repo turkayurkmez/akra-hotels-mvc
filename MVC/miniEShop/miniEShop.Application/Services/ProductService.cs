@@ -13,7 +13,11 @@ namespace miniEShop.Application.Services
             this.productRepository = productRepository;
         }
 
-       
+        public Product GetProduct(int productId)
+        {
+           return productRepository.GetById(productId);
+        }
+
         public IEnumerable<Product> GetProducts(int? category)
         {
             return category == null ? productRepository.GetAll() : 

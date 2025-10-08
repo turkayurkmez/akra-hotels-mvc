@@ -18,6 +18,13 @@ var connectionString = builder.Configuration.GetConnectionString("DbConnection")
 
 builder.Services.AddDbContext<MiniEShopDbContext>(option => { option.UseSqlServer(connectionString); });
 
+
+builder.Services.AddSession(option =>
+{
+    //Session'un boþta geçen süresi: 20 dakika olarak ayarlandý:
+    option.IdleTimeout = TimeSpan.FromMinutes(20);    
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -30,6 +37,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
+
+app.UseSession();
 
 app.UseAuthorization();
 

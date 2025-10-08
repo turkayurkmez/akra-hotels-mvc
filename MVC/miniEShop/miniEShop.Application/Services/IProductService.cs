@@ -6,5 +6,7 @@ namespace miniEShop.Application.Services
     {
         IEnumerable<Product> GetProducts(int? category);
         IEnumerable<Product> GetProductsWithPagination(int page,  int pageSize);
+
+        Product GetProduct(int productId);
     }
 }

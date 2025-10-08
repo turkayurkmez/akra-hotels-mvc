@@ -28,13 +28,13 @@ namespace miniEShop.MVC.Controllers
 
             var totalProducts = products.Count();
             var pageSize = 4;
+
             //var products = productService.GetProductsWithPagination(page, pageSize);
             //var totalPage = (int)Math.Ceiling((decimal)totalProducts / pageSize);
 
             var pagingInfo = new PagingInfo { CurrentPage=page, PageSize = pageSize, TotalProducts=products.Count() };
 
-            //ViewBag.TotalPages = totalPage;
-         
+            //ViewBag.TotalPages = totalPage;         
             //ViewBag.CurrentPage = page;
 
 
