@@ -1,7 +1,9 @@
 
 using Microsoft.EntityFrameworkCore;
+using miniEShop.Application.Contracts;
 using miniEShop.Application.Services;
 using miniEShop.Infrastructure.Data;
+using miniEShop.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IProductRepository, EFProductRepository>();
+builder.Services.AddScoped<ICategoryRepository, EFCategoryRepository>();
 
 var connectionString = builder.Configuration.GetConnectionString("DbConnection");
 

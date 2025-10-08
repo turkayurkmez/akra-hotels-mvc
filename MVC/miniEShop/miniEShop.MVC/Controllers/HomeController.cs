@@ -23,13 +23,15 @@ namespace miniEShop.MVC.Controllers
 
             //toplam sayfa: ürün toplamý / bir sayfada gösterilecek ürün sayýsý..
 
-          //  var productService = new ProductService();// Yüksek baðýmlýlýk oluþur.
-            var products = productService.GetProducts();
+           //   var productService = new ProductService();// Yüksek baðýmlýlýk oluþur.
+            var products = productService.GetProducts(category);
+
             var totalProducts = products.Count();
             var pageSize = 4;
+            //var products = productService.GetProductsWithPagination(page, pageSize);
             //var totalPage = (int)Math.Ceiling((decimal)totalProducts / pageSize);
 
-            var pagingInfo = new PagingInfo { CurrentPage=page, PageSize = pageSize, TotalProducts=totalProducts };
+            var pagingInfo = new PagingInfo { CurrentPage=page, PageSize = pageSize, TotalProducts=products.Count() };
 
             //ViewBag.TotalPages = totalPage;
          
