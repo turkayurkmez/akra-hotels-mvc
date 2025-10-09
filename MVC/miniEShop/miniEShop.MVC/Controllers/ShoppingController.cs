@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using miniEShop.Application.Services;
+using miniEShop.MVC.Extensions;
 using miniEShop.MVC.Models;
 using System.Text.Json;
 
@@ -40,20 +41,26 @@ namespace miniEShop.MVC.Controllers
              * Eğer daha önce koleksion oluşturulmuş ve session'a aktarılmış ise oradan okuyup döndür.
              * İlk kez sepete ürün ekleniyorsa yeni instance al.
              */
-            var basketJSON = HttpContext.Session.GetString("basket");
-            if (!string.IsNullOrEmpty(basketJSON))
-            {
-                return JsonSerializer.Deserialize<BasketCollection>(basketJSON);
-            }
+            //var basketJSON = HttpContext.Session.GetString("basket");
+            //if (!string.IsNullOrEmpty(basketJSON))
+            //{
+            //    return JsonSerializer.Deserialize<BasketCollection>(basketJSON);
+            //}
 
-            return new BasketCollection();
+            //return new BasketCollection();
+
+
+            //daha TEMİZ bir biçimde Session ile çalışabilmek için iki adet extension metod yazdık.
+            return HttpContext.Session.GetJson<BasketCollection>("basket") ?? new BasketCollection();
 
         }
 
         private void saveToSession(BasketCollection basketCollection)
         {
-            var serilizedBasket = JsonSerializer.Serialize(basketCollection);
-            HttpContext.Session.SetString("basket", serilizedBasket);
+            //var serilizedBasket = JsonSerializer.Serialize(basketCollection);
+            // HttpContext.Session.SetString("basket", serilizedBasket);
+
+            HttpContext.Session.SetJson("basket", basketCollection);
             
         }
 

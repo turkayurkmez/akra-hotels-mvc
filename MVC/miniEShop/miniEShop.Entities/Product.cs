@@ -19,7 +19,7 @@ namespace miniEShop.Entities
         public int? CategoryId { get; set; }
 
         //Navigation Property:
-        public Category Category { get; set; }
+        public Category? Category { get; set; }
 
     }
 }

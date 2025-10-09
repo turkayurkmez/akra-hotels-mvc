@@ -4,26 +4,37 @@ using miniEShop.Application.Contracts;
 using miniEShop.Application.Services;
 using miniEShop.Infrastructure.Data;
 using miniEShop.Infrastructure.Repositories;
+using miniEShop.MVC.Extensions;
+using miniEShop.Application;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<ICategoryService, CategoryService>();
-builder.Services.AddScoped<IProductRepository, EFProductRepository>();
-builder.Services.AddScoped<ICategoryRepository, EFCategoryRepository>();
+
+
 
 var connectionString = builder.Configuration.GetConnectionString("DbConnection");
+builder.Services.AddDatabaseResources(connectionString);
 
-builder.Services.AddDbContext<MiniEShopDbContext>(option => { option.UseSqlServer(connectionString); });
 
 
 builder.Services.AddSession(option =>
 {
     //Session'un boþta geçen süresi: 20 dakika olarak ayarlandý:
-    option.IdleTimeout = TimeSpan.FromMinutes(20);    
+    option.IdleTimeout = TimeSpan.FromMinutes(20);
 });
+
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(option =>
+                {
+                    option.LoginPath = "/Users/Login";
+                    option.ReturnUrlParameter = "gidilecekUrl";
+                    option.AccessDeniedPath = "/Users/AccessDenied";
+                });
+
 
 var app = builder.Build();
 
@@ -40,7 +51,9 @@ app.UseRouting();
 
 app.UseSession();
 
+app.UseAuthentication();
 app.UseAuthorization();
+
 
 //.net 9.0'da varsayýlandýr. Yani .net 8.0 template'inde bu satýr yok.
 app.MapStaticAssets();
