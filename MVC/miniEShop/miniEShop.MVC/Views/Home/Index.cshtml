@@ -59,7 +59,11 @@
                          console.log(data);
                      },
                      error:function(err){
-                         console.log(err);
+                        // console.log(err);
+                         console.log("gelen hata kodu",err.status);
+                         if(err.status === 401){
+                             alert('Giriş yapmadan sepeti kullanamazsınız');
+                         }
                      }
                  });
                  console.log(id);

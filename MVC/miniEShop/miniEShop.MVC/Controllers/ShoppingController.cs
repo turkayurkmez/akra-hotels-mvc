@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using miniEShop.Application.Services;
 using miniEShop.MVC.Extensions;
 using miniEShop.MVC.Models;
@@ -6,6 +7,7 @@ using System.Text.Json;
 
 namespace miniEShop.MVC.Controllers
 {
+    [Authorize(Policy = "Client")]
     public class ShoppingController : Controller
     {
 
@@ -16,6 +18,7 @@ namespace miniEShop.MVC.Controllers
             this.productService = productService;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var collection = getCollectionFromSession();

@@ -7,11 +7,16 @@ using miniEShop.Infrastructure.Repositories;
 using miniEShop.MVC.Extensions;
 using miniEShop.Application;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(opt =>
+{
+    opt.CacheProfiles.Add("Default45", new CacheProfile { Duration = 45 });
+});
+                
 
 
 
@@ -30,10 +35,28 @@ builder.Services.AddSession(option =>
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(option =>
                 {
-                    option.LoginPath = "/Users/Login";
-                    option.ReturnUrlParameter = "gidilecekUrl";
-                    option.AccessDeniedPath = "/Users/AccessDenied";
+                    option.LoginPath = "/Users/Login"; //Accounts/Login
+                    option.ReturnUrlParameter = "gidilecekUrl";//returnUrl
+                    option.AccessDeniedPath = "/Users/AccessDenied"; //Accounts/AccessDenied
+                    option.ExpireTimeSpan = TimeSpan.FromHours(8); //24 
+                    option.SlidingExpiration = true; // false
+                    option.Cookie.Name = "MyDomainCookieAuth"; //Encoding-Random
+                    option.Cookie.HttpOnly = true; // false
+                    option.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest; //None
                 });
+
+builder.Services.AddAuthorization(option =>
+{
+    option.AddPolicy("Admin", policy =>
+    {
+        policy.RequireRole("Admin", "Editor");
+    });
+
+    option.AddPolicy("Client", policy => policy.RequireRole("Client","Admin","Editor"));
+});
+
+
+builder.Services.AddMemoryCache();
 
 
 var app = builder.Build();
