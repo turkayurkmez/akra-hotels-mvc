@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\miniEShop.Application\miniEShop.Application.csproj" />
-    <ProjectReference Include="..\miniEShop.Entities\miniEShop.Entities.csproj" />
   </ItemGroup>
 
 </Project>
