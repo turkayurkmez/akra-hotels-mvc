@@ -1,0 +1,20 @@
+@miniEShop.API_HostAddress = http://localhost:5041
+
+GET {{miniEShop.API_HostAddress}}/products/
+Accept: application/json
+
+###
+GET {{miniEShop.API_HostAddress}}/products/4
+Accept: application/json
+
+###
+POST {{miniEShop.API_HostAddress}}/products/
+Content-Type: application/json
+
+{
+  "name": "Test Ürünü",
+  "description": "Bu bir test ürünüdür",
+  "price": 299.99,
+  "categoryId": 1,
+  "imageUrl": "https://example.com/test-product.jpg"
+}
